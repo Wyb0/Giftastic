@@ -7,6 +7,19 @@ $(document).ready(function () {
     var moviegif=""
     var queryURL="https://api.giphy.com/v1/gifs/search?q=" + moviegif + "&api_key=" + key + "&limit=10&rating=PG-13";
    
+    function buttons() {
+        $(".buttons").empty();
+        $.each(moviesArray, function (index) {
+            var b = $("<button>")
+            b.attr("data-name", moviesArray [index])
+            b.addClass("moviesAdd")
+            b.text(moviesArray[index])
+                $(".buttons").append(b)
+        })
+    }
+
+    buttons();
+
     $.ajax({
         url: queryURL,
         method: 'GET'
