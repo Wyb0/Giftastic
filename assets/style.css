@@ -1,3 +1,14 @@
+body {
+    font-size: 18px;
+}
+
 .searchBox {
     float: right;
 }
+
+img {
+    width: 400px;
+    height: 200px;
+}
+
+
