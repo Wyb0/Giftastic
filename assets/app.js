@@ -32,16 +32,33 @@
             $(".moviegifs").empty();
             console.log(response)
             for (var i = 0; i < response.data.length; i++) {
-                var animateGif = response.data[i].images.original.url;
-                var gifImage = $("<img>").attr("src", animateGif);
                 var stillGif = response.data[i].images.original_still.url;
+                var gifStill = $("<img>").attr("src", stillGif);
+                $(gifStill).attr("data-state", "still")
+                $(gifStill).addClass("gif")
+                $(gifStill).attr("data-animate", response.data[i].images.fixed_height.url)
+                $(gifStill).attr("data-still", response.data[i].images.original_still.url)
                 var ratings = response.data[i].rating;
-                $(".moviegifs").append("<br>", "Rating = ", ratings, "<br>", gifImage, )
+                $(".moviegifs").append("<br>", "Rating = ", ratings, "<br>", gifStill)
             
             }
         })
     }
 
 $(document).on("click", ".moviesAdd", postGifs);
+$(document).on("click", ".gif", function() {
+    var state = $(this).attr("data-state")
+    var animate = $(this).attr("data-animate")
+    var still = $(this).attr("data-still")
+        if(state=="still") {
+            $(this).attr("data-state", "animate")
+            $(this).attr("src", animate)
+        }
+        else if (state=="animate") {
+            $(this).attr("data-state", "still")
+            $(this).attr("src", still)
+        }
+
+})
 
 
